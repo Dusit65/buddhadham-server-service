@@ -52,8 +52,8 @@ exports.checkLoginUser = async (req, res) => {
     // ค้นหาผู้ใช้
     const result = await prisma.user_tb.findFirst({
       where: {
-        userEmail,
-        userPassword,
+        userName,
+        userEmail
       },
     });
 
