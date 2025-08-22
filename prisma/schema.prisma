@@ -1,5 +1,6 @@
 generator client {
   provider = "prisma-client-js"
+  output   = "../generated/prisma"
 }
 
 datasource db {
@@ -13,42 +14,46 @@ model user_tb {
   userEmail    String    @db.VarChar(50)
   userPassword String    @db.VarChar(50)
   createAt     DateTime  @default(now())
+
   chats        chat_tb[]
 }
 
 model chat_tb {
-  chatId     Int      @id @default(autoincrement())
-  userId     Int
-  chatHeader String   @db.VarChar(50)
-  createAt   DateTime @default(now())
-  user       user_tb  @relation(fields: [userId], references: [userId])
-  qnas       qNa_tb[]
+  chatId      Int       @id @default(autoincrement())
+  userId      Int
+  chatHeader  String    @db.VarChar(50)
+  createAt    DateTime  @default(now())
 
-  @@index([userId], map: "chat_tb_userId_fkey")
+  user        user_tb   @relation(fields: [userId], references: [userId])
+  qnas        qNa_tb[]
 }
 
 model qNa_tb {
-  qNaId    Int     @id @default(autoincrement())
-  chatId   Int
-  qNaWords String  @db.Text
-  qNaType  String  @db.VarChar(9)
-  chat     chat_tb @relation(fields: [chatId], references: [chatId])
-
-  @@index([chatId], map: "qNa_tb_chatId_fkey")
+  qNaId     Int       @id @default(autoincrement())
+  chatId    Int
+  qNaWords  String    @db.Text
+  qNaType   String    @db.VarChar(9)
+  createAt    DateTime  @default(now())
+  chat      chat_tb   @relation(fields: [chatId], references: [chatId])
 }
 
 model book_tb {
-  bookId   Int          @id @default(autoincrement())
-  bookName String       @db.Text
-  chapters chapter_tb[]
+  bookId    Int           @id @default(autoincrement())
+  bookName  String        @db.Text
+  chapters  chapter_tb[]
 }
 
 model chapter_tb {
-  chapterId   Int     @id @default(autoincrement())
+  chapterId   Int        @id @default(autoincrement())
   bookId      Int
-  chapterName String  @db.VarChar(50)
-  chapterText String  @db.Text
-  book        book_tb @relation(fields: [bookId], references: [bookId])
+  chapterName String     @db.VarChar(50)
+  chapterText String     @db.Text
 
-  @@index([bookId], map: "chapter_tb_bookId_fkey")
+  book        book_tb    @relation(fields: [bookId], references: [bookId])
+}
+
+model log_tb {
+  id        Int      @id @default(autoincrement())
+  createAt DateTime @default(now())
+  message   String
 }

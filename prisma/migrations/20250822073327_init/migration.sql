@@ -25,6 +25,7 @@ CREATE TABLE `qNa_tb` (
     `chatId` INTEGER NOT NULL,
     `qNaWords` TEXT NOT NULL,
     `qNaType` VARCHAR(9) NOT NULL,
+    `createAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
 
     PRIMARY KEY (`qNaId`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
@@ -45,6 +46,15 @@ CREATE TABLE `chapter_tb` (
     `chapterText` TEXT NOT NULL,
 
     PRIMARY KEY (`chapterId`)
+) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+
+-- CreateTable
+CREATE TABLE `log_tb` (
+    `id` INTEGER NOT NULL AUTO_INCREMENT,
+    `createAt` DATETIME(3) NOT NULL DEFAULT CURRENT_TIMESTAMP(3),
+    `message` VARCHAR(191) NOT NULL,
+
+    PRIMARY KEY (`id`)
 ) DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 
 -- AddForeignKey

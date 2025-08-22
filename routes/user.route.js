@@ -10,7 +10,7 @@ const router = express.Router();
 //GET = ค้นหา ตรวจสอบ ดึง ดู, POST = เพิ่ม, PUT = แก้ไข, DELETE = ลบ
 
 router.post("/",userCtrl.createUser);
-router.get("/:userEmail/:userPassword", userCtrl.checkLoginUser);
+router.post("/login", userCtrl.checkLoginUser);
 
 //export router for call to use
 module.exports = router;

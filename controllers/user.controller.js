@@ -40,23 +40,31 @@ exports.createUser = async (req, res) => {
 // Func Check Login User ===============================================
 exports.checkLoginUser = async (req, res) => {
   try {
-    //-----
+    const { userEmail, userPassword } = req.body;
+
+    // ตรวจสอบว่าข้อมูลครบไหม
+    if (!userEmail || !userPassword) {
+      return res.status(400).json({
+        message: "userEmail and userPassword are required.",
+      });
+    }
+
+    // ค้นหาผู้ใช้
     const result = await prisma.user_tb.findFirst({
       where: {
-        userEmail: req.params.userEmail,
-        userPassword: req.params.userPassword,
+        userEmail,
+        userPassword,
       },
     });
-    //-----
+
     if (result) {
       res.status(200).json({
-        message: "User login succesfully OvO",
+        message: "User login successfully OvO",
         data: result,
       });
     } else {
       res.status(404).json({
         message: "User login failed TwT",
-        data: result,
       });
     }
   } catch (error) {
@@ -65,4 +73,5 @@ exports.checkLoginUser = async (req, res) => {
     });
   }
 };
+
 
