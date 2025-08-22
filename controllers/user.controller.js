@@ -60,7 +60,10 @@ exports.checkLoginUser = async (req, res) => {
     if (result) {
       res.status(200).json({
         message: "User login successfully OvO",
-        data: result,
+        data: {
+          userName: result.userName,
+          userEmail: result.userEmail
+        }
       });
     } else {
       res.status(404).json({
