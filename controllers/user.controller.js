@@ -40,7 +40,7 @@ exports.createUser = async (req, res) => {
 // Func Check Login User ===============================================
 exports.checkLoginUser = async (req, res) => {
   try {
-    const { userName, userEmail, userPassword } = req.body;
+    const { userEmail, userPassword } = req.body;
 
     // ตรวจสอบว่าข้อมูลครบไหม
     if (!userEmail || !userPassword) {
@@ -52,8 +52,8 @@ exports.checkLoginUser = async (req, res) => {
     // ค้นหาผู้ใช้
     const result = await prisma.user_tb.findFirst({
       where: {
-        userName,
-        userEmail
+        userEmail,
+        userPassword
       },
     });
 
