@@ -1,0 +1,54 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model user_tb {
+  userId       Int       @id @default(autoincrement())
+  userName     String    @db.VarChar(100)
+  userEmail    String    @db.VarChar(50)
+  userPassword String    @db.VarChar(50)
+  createAt     DateTime  @default(now())
+  chats        chat_tb[]
+}
+
+model chat_tb {
+  chatId     Int      @id @default(autoincrement())
+  userId     Int
+  chatHeader String   @db.VarChar(50)
+  createAt   DateTime @default(now())
+  user       user_tb  @relation(fields: [userId], references: [userId])
+  qnas       qNa_tb[]
+
+  @@index([userId], map: "chat_tb_userId_fkey")
+}
+
+model qNa_tb {
+  qNaId    Int     @id @default(autoincrement())
+  chatId   Int
+  qNaWords String  @db.Text
+  qNaType  String  @db.VarChar(9)
+  chat     chat_tb @relation(fields: [chatId], references: [chatId])
+
+  @@index([chatId], map: "qNa_tb_chatId_fkey")
+}
+
+model book_tb {
+  bookId   Int          @id @default(autoincrement())
+  bookName String       @db.Text
+  chapters chapter_tb[]
+}
+
+model chapter_tb {
+  chapterId   Int     @id @default(autoincrement())
+  bookId      Int
+  chapterName String  @db.VarChar(50)
+  chapterText String  @db.Text
+  book        book_tb @relation(fields: [bookId], references: [bookId])
+
+  @@index([bookId], map: "chapter_tb_bookId_fkey")
+}
