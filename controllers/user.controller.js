@@ -40,7 +40,7 @@ exports.createUser = async (req, res) => {
 // Func Check Login User ===============================================
 exports.checkLoginUser = async (req, res) => {
   try {
-    const { userEmail, userPassword } = req.body;
+    const { userName, userEmail, userPassword } = req.body;
 
     // ตรวจสอบว่าข้อมูลครบไหม
     if (!userEmail || !userPassword) {
