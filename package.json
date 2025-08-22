@@ -11,7 +11,7 @@
     "start": "nodemon server.js",
     "vercel-build": "npx prisma generate",
     "migrate-dev": "prisma migrate dev && prisma generate",
-    "generate": "prisma generate",
+    "postinstall": "prisma generate",
     "build": "npm run generate"
   },
   "devDependencies": {
