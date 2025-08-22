@@ -10,7 +10,9 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
     "vercel-build": "npx prisma generate",
-    "migrate-dev": "prisma migrate dev && prisma generate"
+    "migrate-dev": "prisma migrate dev && prisma generate",
+    "generate": "prisma generate",
+    "build": "npm run generate"
   },
   "devDependencies": {
     "nodemon": "^3.1.10"
