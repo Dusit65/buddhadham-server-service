@@ -28,3 +28,20 @@ pip install ollama
 
 "vercel-build": "npx prisma generate",
 "postinstall": "prisma generate"
+
+```
+buddhadham-server-service
+v0.3.1
+    add python 
+        BuddhadhamAI, 
+        db_handler, 
+        debugger, 
+        log_model, 
+        reDocuments,
+        main 
+    add controller chat,qNa
+    add routes chat,qNa
+    add embed_status.json
+
+    .env change mysql to sqlserver
+```
