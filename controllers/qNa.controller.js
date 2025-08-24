@@ -14,7 +14,7 @@ exports.ask = async (req, res) => {
     }
 
     // ส่ง request ไปที่ main.py API
-    const response = await axios.post("http://127.0.0.1:8000/ask", {
+    const response = await axios.post("http://58.136.203.105:8000/ask", {
       args: [question, ...(k != null ? ["-k", k.toString()] : []), ...(d != null ? ["-d", d.toString()] : [])]
     });
 
