@@ -3,7 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "sqlserver"
   url      = env("DATABASE_URL")
 }
 
@@ -20,7 +20,7 @@ model user_tb {
 model chat_tb {
   chatId      Int       @id @default(autoincrement())
   userId      Int
-  chatHeader  String    @db.VarChar(50)
+  chatHeader  String    @db.NVarChar(50)
   createAt    DateTime  @default(now())
 
   user        user_tb   @relation(fields: [userId], references: [userId])
@@ -30,29 +30,41 @@ model chat_tb {
 model qNa_tb {
   qNaId     Int       @id @default(autoincrement())
   chatId    Int
-  qNaWords  String    @db.Text
-  qNaType   String    @db.VarChar(9)
-  createAt    DateTime  @default(now())
+  qNaWords  String    @db.NVarChar(MAX)
+  qNaType   String    @db.Char(1)
+  createdAt DateTime  @default(now())
+
   chat      chat_tb   @relation(fields: [chatId], references: [chatId])
 }
 
 model book_tb {
   bookId    Int           @id @default(autoincrement())
-  bookName  String        @db.Text
+  bookName  String        @db.NVarChar(MAX)
   chapters  chapter_tb[]
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt @default(now())
 }
 
 model chapter_tb {
   chapterId   Int        @id @default(autoincrement())
   bookId      Int
-  chapterName String     @db.VarChar(50)
-  chapterText String     @db.Text
+  chapterName String     @db.NVarChar(50)
+  chapterText String     @db.NVarChar(MAX)
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt @default(now())
 
   book        book_tb    @relation(fields: [bookId], references: [bookId])
 }
 
+model embeddings_tb {
+  id          Int      @id @default(autoincrement())
+  embeddings  Bytes    // เก็บ numpy array เป็น binary
+  metadata    Bytes    // เก็บ pickle docs
+  updatedAt   DateTime @default(now())
+}
+
 model log_tb {
   id        Int      @id @default(autoincrement())
-  createAt DateTime @default(now())
-  message   String
+  createdAt DateTime @default(now())
+  message   String   @db.NVarChar(MAX)
 }

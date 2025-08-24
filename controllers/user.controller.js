@@ -19,6 +19,7 @@ exports.createUser = async (req, res) => {
   try {
     const result = await prisma.user_tb.create({
       data: {
+
         userName: req.body.userName,
         userEmail: req.body.userEmail,
         userPassword: req.body.userPassword,
@@ -61,6 +62,7 @@ exports.checkLoginUser = async (req, res) => {
       res.status(200).json({
         message: "User login successfully OvO",
         data: {
+          userId: result.userId,
           userName: result.userName,
           userEmail: result.userEmail
         }
