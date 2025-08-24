@@ -9,7 +9,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server.js",
-    "migrate-dev": "prisma migrate dev && prisma generate"
+    "migrate-dev": "prisma migrate dev && prisma generate",
+    "vercel-build": "npx prisma generate",
+    "postinstall": "prisma generate"
     
   },
   "devDependencies": {
