@@ -60,7 +60,7 @@ exports.getqNaByChatId = async (req, res) => {
     const chats = await prisma.qNa_tb.findMany({
       where: {chatId: Number(req.params.chatId)
        },
-      orderBy: { createdAt: "desc" },
+      orderBy: { createdAt: "asc" },
     });
     res.status(200).json({ message: "ดึงข้อความแชทของผู้ใช้สำเร็จ", data: chats });
   } catch (error) {
@@ -78,7 +78,7 @@ exports.getqNa = async (req, res) => {
         user: {
           select: {
             userName: true,
-            userImage: true,
+            
           },
         },
       },
