@@ -15,7 +15,6 @@ exports.createUser = async (req, res) => {
   try {
     const result = await prisma.user_tb.create({
       data: {
-
         userName: req.body.userName,
         userEmail: req.body.userEmail,
         userPassword: req.body.userPassword,

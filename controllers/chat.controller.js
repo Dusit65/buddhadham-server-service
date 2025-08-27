@@ -99,7 +99,6 @@ exports.getChat = async (req, res) => {
         user: {
           select: {
             userName: true,
-            userImage: true,
           },
         },
       },
