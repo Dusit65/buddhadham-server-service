@@ -42,6 +42,7 @@ v0.3.1
     add controller chat,qNa
     add routes chat,qNa
     add embed_status.json
-
+v0.3.3
+    change ip 
     .env change mysql to sqlserver
 ```
