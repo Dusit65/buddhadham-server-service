@@ -42,11 +42,9 @@ exports.editChat = async (req, res) => {
     }
 
     const updatedData = {
-      chatMessage: req.body.chatMessage,
-      userId: Number(req.body.userId),
-      chatImage: "", // ไม่มีรูปภาพ
+      chatHeader: req.body.chatHeader.toString(),    
     };
-
+    console.log(updatedData);
     const result = await prisma.chat_tb.update({
       where: { chatId: Number(req.params.chatId) },
       data: updatedData,
