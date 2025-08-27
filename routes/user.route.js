@@ -1,7 +1,7 @@
-//This file is used to manage routing for service/API calls
-//This file works with user_tb
+//ไฟล์นี้ใช้สำหรับจัดการการกำหนดเส้นทางสำหรับการเรียกใช้บริการ/API
+//ไฟล์นี้ทำงานกับ user_tb
 
-//call express to use router module
+//เรียก express เพื่อใช้ router module
 const express = require("express");
 const userCtrl = require("./../controllers/user.controller.js");
 const router = express.Router();
@@ -12,5 +12,5 @@ const router = express.Router();
 router.post("/",userCtrl.createUser);
 router.post("/login", userCtrl.checkLoginUser);
 
-//export router for call to use
+//export router เพื่อเรียกใข้งาน
 module.exports = router;

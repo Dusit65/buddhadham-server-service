@@ -1,20 +1,16 @@
-//File that writes control operations for a table in the database
+
+// ไฟล์ที่เขียนการดำเนินการควบคุมสำหรับตารางในฐานข้อมูล
 //เช่น insert, update, delete, select
-//This file works with user_tb
+//ไฟล์นี้ทำงานกับ user_tb
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
 
-//Use prisma to co working with DB
+//ใช้ Prisma เพื่อทำงานร่วมกับ DB
 const { PrismaClient } = require("@prisma/client"); //Models
 const prisma = new PrismaClient();
 
-
-//++++++++++++++++++++++++++++++ End of Require +++++++++++++++++++++++++++++++++
-
-//+++++++++++++++++++++++++ INSERT UPDATE DELETE FUNC ++++++++++++++++++++++++++++++++++++
-
-// Func Insert User ===============================
+// สร้างผู้ใช้งานใหม่ 
 exports.createUser = async (req, res) => {
   try {
     const result = await prisma.user_tb.create({
@@ -36,9 +32,7 @@ exports.createUser = async (req, res) => {
   }
 };
 
-
-
-// Func Check Login User ===============================================
+// ตรวจสอบการเข้าสู่ระบบ 
 exports.checkLoginUser = async (req, res) => {
   try {
     const { userEmail, userPassword } = req.body;
