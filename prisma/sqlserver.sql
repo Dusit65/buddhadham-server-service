@@ -1,0 +1,2 @@
+DELETE FROM log_tb;
+DBCC CHECKIDENT ('log_tb', RESEED, 0);
