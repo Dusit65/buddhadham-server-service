@@ -12,7 +12,7 @@ model user_tb {
   userName     String    @db.VarChar(100)
   userEmail    String    @db.VarChar(50)
   userPassword String    @db.VarChar(50)
-  createAt     DateTime  @default(now())
+  createdAt     DateTime  @default(now())
 
   chats        chat_tb[]
 }
@@ -21,7 +21,7 @@ model chat_tb {
   chatId      Int       @id @default(autoincrement())
   userId      Int
   chatHeader  String    @db.NVarChar(50)
-  createAt    DateTime  @default(now())
+  createdAt    DateTime  @default(now())
 
   user        user_tb   @relation(fields: [userId], references: [userId])
   qnas        qNa_tb[]

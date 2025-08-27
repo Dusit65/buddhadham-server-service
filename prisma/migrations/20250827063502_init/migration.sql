@@ -8,7 +8,7 @@ CREATE TABLE [dbo].[user_tb] (
     [userName] VARCHAR(100) NOT NULL,
     [userEmail] VARCHAR(50) NOT NULL,
     [userPassword] VARCHAR(50) NOT NULL,
-    [createAt] DATETIME2 NOT NULL CONSTRAINT [user_tb_createAt_df] DEFAULT CURRENT_TIMESTAMP,
+    [createdAt] DATETIME2 NOT NULL CONSTRAINT [user_tb_createdAt_df] DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT [user_tb_pkey] PRIMARY KEY CLUSTERED ([userId])
 );
 
@@ -17,7 +17,7 @@ CREATE TABLE [dbo].[chat_tb] (
     [chatId] INT NOT NULL IDENTITY(1,1),
     [userId] INT NOT NULL,
     [chatHeader] NVARCHAR(50) NOT NULL,
-    [createAt] DATETIME2 NOT NULL CONSTRAINT [chat_tb_createAt_df] DEFAULT CURRENT_TIMESTAMP,
+    [createdAt] DATETIME2 NOT NULL CONSTRAINT [chat_tb_createdAt_df] DEFAULT CURRENT_TIMESTAMP,
     CONSTRAINT [chat_tb_pkey] PRIMARY KEY CLUSTERED ([chatId])
 );
 
