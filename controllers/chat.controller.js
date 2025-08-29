@@ -4,7 +4,7 @@ const prisma = new PrismaClient();
 // สร้างแชทใหม่
 exports.createChat = async (req, res) => {
   try {
-    const { chatHeader } = req.body;
+    const { userId, chatHeader } = req.body;
 
     if (!chatHeader) {
       return res.status(400).json({ message: "Chat header is required." });
@@ -12,6 +12,7 @@ exports.createChat = async (req, res) => {
 
     const result = await prisma.chat_tb.create({
       data: {
+        userId,
         chatHeader,
       },
     });
