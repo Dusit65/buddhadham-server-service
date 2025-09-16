@@ -182,3 +182,22 @@ exports.deleteqNa = async (req, res) => {
     res.status(500).json({ message: "Error: " + error.message });
   }
 };
+
+// เช็คสถานะงาน
+exports.checkStatus = async (req, res) => {
+  const { taskId } = req.params;
+  try {
+    const response = await axios.get("http://" + process.env.AI_SERVER + ":" + process.env.AI_SERVER_PORT + "/status/" + taskId);
+    return res.status(200).json({
+      message: "Status fetched successfully",
+      taskId,
+      responseData: response.data,
+    });
+  } catch (error) {
+    console.error("Error fetching status: ", error.message);
+    return res.status(500).json({
+      message: "Failed to fetch status",
+      error: error.message,
+    });
+  }
+};
