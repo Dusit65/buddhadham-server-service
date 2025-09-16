@@ -20,8 +20,8 @@ INSERT INTO chat_tb (userId, chatHeader, createdAt)
 VALUES 
 (1, N'ทุกข์', GETDATE()),
 (2, N'สมุทัย', GETDATE()),
-(1, N'นิโรธ', GETDATE()),
-(1, N'มรรค', GETDATE());
+(3, N'นิโรธ', GETDATE()),
+(4, N'มรรค', GETDATE());
 
 INSERT INTO chat_tb (userId, chatHeader, createdAt)
 VALUES 
