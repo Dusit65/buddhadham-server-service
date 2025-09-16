@@ -42,7 +42,67 @@ exports.ask = async (req, res) => {
     res.status(500).json({ message: "Unexpected error: " + error.message, stack: error.stack });
   }
 };
+exports.saveAnswer = async (req, res) => {
+  try {
+    const { taskId, chatId, qNaWords } = req.body;
 
+    if (!taskId) {
+      return res.status(400).json({ message: "taskId is required." });
+    }
+
+    if (!chatId) {
+      return res.status(400).json({ message: "chatId is required." });
+    }
+
+    if (!qNaWords) {
+      return res.status(400).json({ message: "qNaWords is required." });
+    }
+
+    // บันทึกคำตอบ AI ลง qNa_tb
+    const savedAnswer = await prisma.qNa_tb.create({
+      data: {
+        chatId: chatId,
+        taskId: taskId,
+        qNaWords: qNaWords,
+        qNaType: "A", // A = Answer
+      },
+    });
+
+    console.log("Saved AI answer:", savedAnswer);
+    return res.status(201).json({ message: "AI answer saved", data: savedAnswer });
+
+  } catch (err) {
+    console.error("Error saving AI answer:", err);
+    return res.status(500).json({ message: "Internal server error", error: err.message });
+  }
+};
+
+exports.cancel = async (req, res) => {
+  const { taskId } = req.body;
+
+  if (!taskId) {
+    return res.status(400).json({ message: "taskId is required" });
+  }
+
+  try {
+    // ส่ง request ไป main.py
+    const response = await axios.post("http://" + process.env.AI_SERVER + ":" + process.env.AI_SERVER_PORT + "/cancel/" + taskId);
+
+    // ส่งผลกลับ client
+    return res.status(200).json({
+      message: "Cancel request sent",
+      taskId,
+      mainResponse: response.data,
+    });
+
+  } catch (error) {
+    console.error("Error cancelling job:", error.message);
+    return res.status(500).json({
+      message: "Failed to cancel job",
+      error: error.message,
+    });
+  }
+};
 // ดึงข้อความแชททั้งหมด
 exports.getAllqNa = async (req, res) => {
   try {
