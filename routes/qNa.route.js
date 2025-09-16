@@ -6,6 +6,7 @@ const router = express.Router();
 router.get("/:chatId", qNaCtrl.getqNaByChatId);
 router.post("/ask", qNaCtrl.ask);
 router.post("/answer", qNaCtrl.saveAnswer);
+router.post("/cancel/:taskId", qNaCtrl.cancel);
 router.delete("/:qNaId", qNaCtrl.deleteqNa);
 
 module.exports = router;

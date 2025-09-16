@@ -11,13 +11,13 @@ require("dotenv").config(); // call to use .env
 
 const app = express(); // create web server
 const PORT = process.env.PORT || 5000; 
-// const server = http.createServer(app);
-// const io = new Server(server, {
-//   cors: {
-//     origin: "http://localhost:8081", // หรือ "*" ใน dev
-//     methods: ["GET", "POST"]
-//   }
-// });
+const server = http.createServer(app);
+const io = new Server(server, {
+  cors: {
+    origin: "http://localhost:8081", // หรือ "*" ใน dev
+    methods: ["GET", "POST"]
+  }
+});
 
 //Middleware 
 app.use(cors());
